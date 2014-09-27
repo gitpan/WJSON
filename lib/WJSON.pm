@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 has 'json' => (
     is => 'ro',
@@ -619,7 +619,6 @@ Result JSON
 
 =head2 Example 9
 
-    
     my $json = new WJSON;
     $json->Open('glossary');
         $json->Object(
@@ -681,6 +680,8 @@ Result JSON
         }
     }
     
+=cut
+    
 =head2 Example 10
     
     my $json = new WJSON;
@@ -734,8 +735,6 @@ Result JSON
 
 =cut
 
-=cut
-
 =head1 AUTHOR
 
 Lucas Tiago de Moraes, C<< <lucastiagodemoraes@gmail.com> >>
@@ -751,32 +750,6 @@ You can also look for information at:
 =head2 Github
 
 L<https://github.com/lucas1/WJSON>
-
-=cut
-
-=over 4
-
-=item * RT: CPAN's request tracker (report bugs here)
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WJSON>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/WJSON>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/WJSON>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/WJSON/>
-
-=back
-
-
-=head1 ACKNOWLEDGEMENTS
-
 
 =head1 LICENSE AND COPYRIGHT
 

@@ -8,3 +8,6 @@ Revision history for WJSON
 
 0.03    2014-09-27/04:04
         Added more examples in documentation
+        
+0.04    2014-09-27/05:05
+        Correction in POD
