@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 has 'json' => (
     is => 'ro',
@@ -614,6 +614,125 @@ Result JSON
         "key_1": "Formulário",
         "key_2": "value_2"
     };
+
+=cut
+
+=head2 Example 9
+
+    
+    my $json = new WJSON;
+    $json->Open('glossary');
+        $json->Object(
+            title => 'example glossary'
+        );
+        $json->Open('GlossDiv');
+            $json->Object(
+                title => 'S'
+            );
+            $json->Open('GlossList');
+                $json->Object(
+                    GlossSee => 'markup'
+                );
+                $json->Open('GlossEntry');
+                    $json->Object(
+                        ID => 'SGML',
+                        SortAs => 'SGML',
+                        GlossTerm => 'Standard Generalized Markup Language',
+                        Acronym => 'SGML',
+                        Abbrev => 'ISO 8879:1986',
+                    );
+                    $json->Open('GlossDef');
+                        $json->Object(
+                            para => 'A meta-markup language, used to create markup languages such as DocBook.'
+                        );
+                        $json->Open('GlossSeeAlso');
+                            $json->Array('GML', 'XML');
+                        $json->Close;
+                    $json->Close;
+                $json->Close;
+            $json->Close;
+        $json->Close;
+    $json->Close;
+    print $json->HeaderJSCGI;
+    print $json->Print;
+    
+Result JSON
+
+    {
+        "glossary": {
+            "GlossDiv": {
+                "GlossList": {
+                    "GlossEntry": {
+                        "GlossDef": {
+                            "para": "A meta-markup language, used to create markup languages such as DocBook.",
+                            "GlossSeeAlso": ["GML", "XML"]
+                        },
+                        "GlossTerm": "Standard Generalized Markup Language",
+                        "ID": "SGML",
+                        "SortAs": "SGML",
+                        "Acronym": "SGML",
+                        "Abbrev": "ISO 8879:1986"
+                    },
+                    "GlossSee": "markup"
+                },
+                "title": "S"
+            },
+            "title": "example glossary"
+        }
+    }
+    
+=head2 Example 10
+    
+    my $json = new WJSON;
+    $json->Open('menu');
+        $json->Object(
+            id => 'file',
+            value => 'File',
+        );
+        $json->Open('popup');
+            $json->Open('menuitem');
+                $json->Object(
+                    {
+                        value => 'New',
+                        onclick => 'CreateNewDoc()'
+                    },
+                    {
+                        value => 'Open',
+                        onclick => 'OpenDoc()'
+                    },
+                    {
+                        value => 'Close',
+                        onclick => 'CloseDoc()'
+                    }
+                );
+            $json->Close;
+        $json->Close;
+    $json->Close;
+    print $json->HeaderJSCGI;
+    print $json->Print;
+    
+Result JSON
+
+    {
+        "menu": {
+            "value": "File",
+            "popup": {
+                "menuitem": [{
+                    "value": "New",
+                    "onclick": "CreateNewDoc()"
+                }, {
+                    "value": "Open",
+                    "onclick": "OpenDoc()"
+                }, {
+                    "value": "Close",
+                    "onclick": "CloseDoc()"
+                }]
+            },
+            "id": "file"
+        }
+    }
+
+=cut
 
 =cut
 
