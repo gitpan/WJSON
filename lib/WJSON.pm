@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has 'json' => (
     is => 'ro',
@@ -621,24 +621,17 @@ Result JSON
 
 Lucas Tiago de Moraes, C<< <lucastiagodemoraes@gmail.com> >>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-json-simple at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=JSON-Simple>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
 =head1 SUPPORT
 
 You can find documentation for this module with the perldoc command.
 
     perldoc WJSON
 
-
 You can also look for information at:
 
 =head2 Github
 
-L<https://github.com/lucas1/JSON-Simple>
+L<https://github.com/lucas1/WJSON>
 
 =cut
 
@@ -646,19 +639,19 @@ L<https://github.com/lucas1/JSON-Simple>
 
 =item * RT: CPAN's request tracker (report bugs here)
 
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=JSON-Simple>
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WJSON>
 
 =item * AnnoCPAN: Annotated CPAN documentation
 
-L<http://annocpan.org/dist/JSON-Simple>
+L<http://annocpan.org/dist/WJSON>
 
 =item * CPAN Ratings
 
-L<http://cpanratings.perl.org/d/JSON-Simple>
+L<http://cpanratings.perl.org/d/WJSON>
 
 =item * Search CPAN
 
-L<http://search.cpan.org/dist/JSON-Simple/>
+L<http://search.cpan.org/dist/WJSON/>
 
 =back
 
