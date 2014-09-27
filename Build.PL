@@ -5,7 +5,7 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     module_name         => 'WJSON',
-    license             => 'Artistic_2_0',
+    license             => 'Artistic_2',
     dist_author         => q{Lucas Tiago de Moraes <lucastiagodemoraes@gmail.com>},
     dist_version_from   => 'lib/WJSON.pm',
     release_status      => 'stable',

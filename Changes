@@ -14,3 +14,6 @@ Revision history for WJSON
         
 0.05    2014-09-27/06:43
         Changes in documentation
+        
+0.06    2014-09-27/15:56
+        Removed some bugs about array and hash
