@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 has 'json' => (
     is => 'ro',
@@ -310,7 +310,7 @@ WJSON - Write JSON with simplicities
 
 =head1 VERSION
 
-Version 0.01
+Version 0.05
 
 =cut
 
