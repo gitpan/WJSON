@@ -17,3 +17,6 @@ Revision history for WJSON
         
 0.06    2014-09-27/15:56
         Removed some bugs about array and hash
+        
+0.07    2014-09-27/15:56
+        Removed error in method Object

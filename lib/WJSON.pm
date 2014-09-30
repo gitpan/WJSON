@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.06';
+our $VERSION = '0.07';
 
 has 'json' => (
     is => 'ro',
@@ -214,7 +214,7 @@ sub Object {
             my %hash;
             tie %hash, 'Tie::IxHash' if $self->ordering;
             %hash = \@values;
-            push(@{$self->reference->{$self->tmp}[0]}, %hash);   
+            push(@{$self->reference->{$self->tmp}[0]}, \%hash);   
         }else{
             if ($self->tmp) {
                 my %hash;
@@ -224,8 +224,14 @@ sub Object {
             }else{
                 my %hash;
                 tie %hash, 'Tie::IxHash' if $self->ordering;
-                %hash = \@values;
-                push(@{$self->json}, %hash); 
+                if (ref(\@values) eq 'ARRAY') {
+                    my $n = 0;
+                    $n % 2 == 0 ? $hash{$values[$n]} = $values[$n+1] : undef, $n++ for (@values);
+                    push(@{$self->json}, \%hash); 
+                }else{
+                    %hash = \@values;
+                    push(@{$self->json}, \%hash);
+                }
             }
         }
     }
@@ -310,7 +316,7 @@ WJSON - Write JSON with simplicities
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
@@ -652,7 +658,7 @@ Result JSON
             $json->Close;
         $json->Close;
     $json->Close;
-    print $json->HeaderJSCGI;
+    print $json->HeaderCGI;
     print $json->Print;
     
 Result JSON
@@ -709,7 +715,7 @@ Result JSON
             $json->Close;
         $json->Close;
     $json->Close;
-    print $json->HeaderJSCGI;
+    print $json->HeaderCGI;
     print $json->Print;
     
 Result JSON
