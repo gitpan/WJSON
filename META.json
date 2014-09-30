@@ -36,7 +36,7 @@
    "provides" : {
       "WJSON" : {
          "file" : "lib/WJSON.pm",
-         "version" : "0.07"
+         "version" : "0.08"
       }
    },
    "release_status" : "stable",
@@ -45,5 +45,5 @@
          "http://www.perlfoundation.org/artistic_license_2_0"
       ]
    },
-   "version" : "0.07"
+   "version" : "0.08"
 }

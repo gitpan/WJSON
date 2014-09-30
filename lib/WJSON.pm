@@ -6,7 +6,7 @@ use Encode;
 use Tie::IxHash;
 no warnings 'uninitialized';
 
-our $VERSION = '0.07';
+our $VERSION = '0.08';
 
 has 'json' => (
     is => 'ro',
@@ -108,15 +108,17 @@ sub Close {
                 }
             }
         }else{
+            my $result = $self->reference->{$tmp.'/'.$key};
+            $result = [$result] if scalar(@{$result}) <= 1 && $type =~ /(2|3)/;
             if (ref($self->reference->{$self->tmp}[$total - 1]) eq 'HASH') {
                 if ($type == 1) {
-                    push(@{$self->reference->{$self->tmp}}, {$key => $self->reference->{$tmp.'/'.$key}});
+                    push(@{$self->reference->{$self->tmp}}, {$key => $result});
                 }elsif($type == 2) {
-                    $self->reference->{$self->tmp}[$total - 1]{$key} = [$self->reference->{$tmp.'/'.$key}];
+                    $self->reference->{$self->tmp}[$total - 1]{$key} = $result;
                 }elsif($type == 3) {
-                    push(@{$self->reference->{$self->tmp}}, {$key => [$self->reference->{$tmp.'/'.$key}]});
+                    push(@{$self->reference->{$self->tmp}}, {$key => $result});
                 }else{
-                    $self->reference->{$self->tmp}[$total - 1]{$key} = $self->reference->{$tmp.'/'.$key};
+                    $self->reference->{$self->tmp}[$total - 1]{$key} = $result;
                 }
             }else{
                 my $t = 1;
@@ -124,13 +126,13 @@ sub Close {
                     $t = scalar(@{$self->reference->{$self->tmp}[$total - 1]}) || 1;
                 }
                 if ($type == 1) {
-                    push(@{$self->reference->{$self->tmp}[$total - 1]}, {$key => $self->reference->{$tmp.'/'.$key}});
+                    push(@{$self->reference->{$self->tmp}[$total - 1]}, {$key => $result});
                 }elsif($type == 2) {
-                    $self->reference->{$self->tmp}[$total - 1][$t - 1]{$key} = [$self->reference->{$tmp.'/'.$key}];
+                    $self->reference->{$self->tmp}[$total - 1][$t - 1]{$key} = $result;
                 }elsif($type == 3) {
-                    push(@{$self->reference->{$self->tmp}[$total - 1]}, {$key => [$self->reference->{$tmp.'/'.$key}]});
+                    push(@{$self->reference->{$self->tmp}[$total - 1]}, {$key => $result});
                 }else{
-                    $self->reference->{$self->tmp}[$total - 1][$t - 1]{$key} = $self->reference->{$tmp.'/'.$key};
+                    $self->reference->{$self->tmp}[$total - 1][$t - 1]{$key} = $result;
                 }
             }
         }
@@ -164,15 +166,18 @@ sub Close {
                 }
             }
         }else{
+            my $result = $self->reference->{$tmp.'/'.$key};
+            $result = [$result] if scalar(@{$result}) <= 1 && $type =~ /(2|3)/;
             if (ref($self->json->[$total - 1]) eq 'HASH') {
                 if ($type == 1) {
-                    push(@{$self->json}, {$key => $self->reference->{$tmp.'/'.$key}});
+                    push(@{$self->json}, {$key => $result});
                 }elsif($type == 2) {
-                    $self->json->[$total - 1]{$key} = [$self->reference->{$tmp.'/'.$key}];
+                    $self->json->[$total - 1]{$key} = $result;
                 }elsif($type == 3) {
-                    push(@{$self->json}, {$key => [$self->reference->{$tmp.'/'.$key}]});
+                    $result = [$result] if scalar(@{$result}) <= 1;
+                    push(@{$self->json}, {$key => $result});
                 }else{
-                    $self->json->[$total - 1]{$key} = $self->reference->{$tmp.'/'.$key};
+                    $self->json->[$total - 1]{$key} = $result;
                 }
             }else{
                 my $t = 1;
@@ -180,13 +185,13 @@ sub Close {
                     $t = scalar(@{$self->json->[$total - 1]}) || 1;
                 }
                 if ($type == 1) {
-                    push(@{$self->json}, {$key => $self->reference->{$tmp.'/'.$key}});
+                    push(@{$self->json}, {$key => $result});
                  }elsif($type == 2) {
-                    $self->json->[$total - 1]{$key} = [$self->reference->{$tmp.'/'.$key}];
+                    $self->json->[$total - 1]{$key} = $result;
                 }elsif($type == 3) {
-                    push(@{$self->json}, {$key => [$self->reference->{$tmp.'/'.$key}]});
+                    push(@{$self->json}, {$key => $result});
                 }else{
-                    $self->json->[$total - 1]{$key} = $self->reference->{$tmp.'/'.$key};
+                    $self->json->[$total - 1]{$key} = $result;
                 }
             }
         }
@@ -316,7 +321,7 @@ WJSON - Write JSON with simplicities
 
 =head1 VERSION
 
-Version 0.07
+Version 0.08
 
 =cut
 
@@ -458,11 +463,11 @@ Result JSON
     
 Result JSON
 
-    [{
+    {
         "key_3": "value_3",
         "key_1": "value_1",
         "key_2": "value_2"
-    }]
+    }
     
 =cut
 
